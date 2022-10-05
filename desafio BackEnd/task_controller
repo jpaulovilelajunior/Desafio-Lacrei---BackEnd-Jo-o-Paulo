@@ -1,0 +1,35 @@
+import json
+from database import get_db
+
+#Pelo padrão Rest temos os seguintes métodos
+#GET - Realiza consultas na tabela
+#PUT - Atualiza uma entrada na tabela do Banco de Dados
+#POST - Insere uma nova entrada na tabela do Banco de Dados
+#DELETE - Deleta uma entrada na tabela do Banco de Dados
+#No desafio foi solicitado somente listagem e criação de novas tarefas
+
+#realiza uma inserção de uma task no banco
+def post_task(name, description):
+    db = get_db()
+    cursor = db.cursor()
+    #query sql que irá fazer a inserção
+    query = "INSERT INTO tasks(name, description) VALUES (?, ?)" 
+    #execução
+    cursor.execute(staquerytement, [name, description])
+    db.commit()
+    return True
+
+#busca as tasks que já foram inseridas no banco
+def get_tasks():
+    db = get_db()
+    cursor = db.cursor()
+    #query sql que irá fazer a busca
+    query = "SELECT * FROM tasks"
+    cursor.execute(query)
+    consulta = cursor.fetchall()
+    retorno = []
+    #armazena de forma a ser transformado em json no app.py
+    for resultado in consulta:
+        retorno.append({"id"})
+        retorno.append({"id": resultado[0], "name": resultado[1], "description": resultado[2]})
+    return retorno
